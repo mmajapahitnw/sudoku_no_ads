@@ -13,7 +13,7 @@ class ChooseDifficultyScreen extends StatelessWidget {
             Spacer(),
             Text('Choose Difficulty'),
             Spacer(),
-            MenuButtons(label: 'Easy', routeAddress: ''),
+            MenuButtons(label: 'Easy', routeAddress: 'gamePlay'),
             MenuButtons(label: 'Medium', routeAddress: ''),
             MenuButtons(label: 'Hard', routeAddress: ''),
             Spacer(),
