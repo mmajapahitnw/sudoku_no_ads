@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/sudoku_grid.dart';
+import '../widgets/input_pad.dart';
 
 class GamePlayScreen extends StatelessWidget {
   const GamePlayScreen({super.key});
@@ -17,7 +18,7 @@ class GamePlayScreen extends StatelessWidget {
               )
             ),
             const Divider(height: 1),
-            // const Expanded(child: InputPad()),
+            const Expanded(child: InputPad()),
           ],
         ),
       )
