@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sudoku_no_ads/presentation/screens/choose_difficulty_screen.dart';
 import 'presentation/screens/main_menu_screen.dart';
+// import 'presentation/screens/choose_difficulty_screen.dart';
 
 void main() {
   runApp(const SudokuApp());
@@ -23,6 +25,13 @@ class SudokuApp extends StatelessWidget {
         path: '/',
         name: 'home',
         builder: (context, state) => MainMenuScreen(),
+        routes: [
+          GoRoute(
+            path: 'chooseDifficulty',
+            name: 'chooseDifficulty',
+            builder: (context, state) => ChooseDifficultyScreen(),
+          )
+        ]
       ),
     ],
   );

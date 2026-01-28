@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MenuButtons extends StatelessWidget {
   final String label;
@@ -9,7 +10,13 @@ class MenuButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          if (routeAddress != '') {
+            context.go(
+                context.namedLocation(routeAddress)
+            );
+          }
+        },
         child: Text(label)
     );
   }
