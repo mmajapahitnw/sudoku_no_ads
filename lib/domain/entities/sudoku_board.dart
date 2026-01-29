@@ -4,6 +4,12 @@ class SudokuBoard {
   final List<Cell> cells;
 
   const SudokuBoard(this.cells);
+  
+  factory SudokuBoard.empty() {
+    return SudokuBoard(
+      List.generate(81, (index) => Cell(row: index ~/ 9, col: index % 9))
+    );
+  }
 
   factory SudokuBoard.fromSeed(String seed) {
     return SudokuBoard(
