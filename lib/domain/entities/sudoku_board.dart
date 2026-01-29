@@ -18,7 +18,8 @@ class SudokuBoard {
         (index) => Cell(
             row: index ~/ 9,
             col: index % 9,
-            value: seed[index]
+            value: seed[index],
+            isFixed: seed[index] == '0' ? false : true,
         )
       )
     );

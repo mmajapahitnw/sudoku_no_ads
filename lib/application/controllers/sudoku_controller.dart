@@ -36,7 +36,7 @@ class SudokuController extends StateNotifier<SudokuState> {
 
     final updatedBoard = state.board.updateCell(
       selected.row,
-      selected.row,
+      selected.col,
       value,
     );
 
@@ -62,25 +62,18 @@ class SudokuController extends StateNotifier<SudokuState> {
     );
 
     state = state.copyWith(board: updatedBoard, isCompleted: false);
+  }
 
-    void fetchGame() {
-      // add difficulty param later
-      final seed = _fetchPuzzle.seed();
-      final solution = _fetchPuzzle.solution();
+  void newGame() {
+    final seed = _fetchPuzzle();
+    final board = _generateSudoku(seed['puzzle']!);
 
-      state = state.copyWith(seed: seed, solution: solution);
-    }
-
-    void newGame() {
-      fetchGame();
-      final board = _generateSudoku(state.seed);
-
-      state = SudokuState(
-        board: board,
-        seed: state.seed,
-        solution: state.solution,
-      );
-    }
+    state = SudokuState(
+      board: board,
+      seed: seed['puzzle']!,
+      solution: seed['solution']!,
+      difficulty: seed['difficulty']!,
+    );
   }
 
   bool _checkCompletion() {

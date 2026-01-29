@@ -7,8 +7,10 @@ class SudokuState {
   final bool isCompleted;
   final String seed;
   final String solution;
+  final String difficulty;
 
   const SudokuState({
+    this.difficulty = '',
     this.seed = '',
     this.solution = '',
     required this.board,

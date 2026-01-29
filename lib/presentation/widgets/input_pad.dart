@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sudoku_no_ads/application/providers/sudoku_providers.dart';
 
-class InputPad extends StatelessWidget {
+class InputPad extends ConsumerWidget {
   const InputPad({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(sudokuControllerProvider.notifier);
+
     return Column(
       children: [
         Row(
@@ -36,7 +40,7 @@ class InputPad extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.all(2),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => controller.inputNumber(number.toString()),
                   child: Column(
                     children: [
                       Text(number.toString(), style: TextStyle(fontSize: 20)),
