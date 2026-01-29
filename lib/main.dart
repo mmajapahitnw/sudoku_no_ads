@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sudoku_no_ads/presentation/screens/choose_difficulty_screen.dart';
 import 'package:sudoku_no_ads/presentation/screens/game_play_screen.dart';
@@ -6,7 +7,7 @@ import 'presentation/screens/main_menu_screen.dart';
 // import 'presentation/screens/choose_difficulty_screen.dart';
 
 void main() {
-  runApp(const SudokuApp());
+  runApp(const ProviderScope(child: SudokuApp()));
 }
 
 class SudokuApp extends StatelessWidget {
