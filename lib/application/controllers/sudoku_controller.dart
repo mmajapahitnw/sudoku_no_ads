@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:sudoku_no_ads/application/state/sudoku_state.dart';
+import 'package:sudoku_no_ads/domain/entities/puzzle.dart';
 import 'package:sudoku_no_ads/domain/entities/sudoku_board.dart';
 import 'package:sudoku_no_ads/domain/use_cases/fetch_puzzle.dart';
 import 'package:sudoku_no_ads/domain/use_cases/generate_sudoku.dart';
@@ -39,10 +40,15 @@ class SudokuController extends StateNotifier<SudokuState> {
       selected.col,
       value,
     );
-
     final completed = _checkCompletion();
+    final updatedPastBoards = [...state.pastBoards, state.board];
 
-    state = state.copyWith(board: updatedBoard, isCompleted: completed);
+    state = state.copyWith(
+      board: updatedBoard,
+      pastBoards: updatedPastBoards,
+      futureBoards: [],
+      isCompleted: completed,
+    );
   }
 
   void clearCell() {
@@ -60,11 +66,56 @@ class SudokuController extends StateNotifier<SudokuState> {
       selected.col,
       '0',
     );
+    final updatedPastBoards = [...state.pastBoards, state.board];
 
-    state = state.copyWith(board: updatedBoard, isCompleted: false);
+    state = state.copyWith(
+      board: updatedBoard,
+      pastBoards: updatedPastBoards,
+      futureBoards: [],
+      isCompleted: false,
+    );
+  }
+
+  void undo() {
+    if (!state.canUndo) return;
+
+    final updatedBoard = state.pastBoards.last;
+    final updatedPastBoards = state.pastBoards.sublist(
+      0,
+      state.pastBoards.length - 1,
+    );
+    final updatedFutureBoards = [state.board, ...state.futureBoards];
+
+    state = state.copyWith(
+      board: updatedBoard,
+      pastBoards: updatedPastBoards,
+      futureBoards: updatedFutureBoards,
+      isCompleted: false,
+    );
+  }
+
+  void redo() {
+    if (!state.canRedo) return;
+
+    final updatedBoard = state.futureBoards[0];
+    final updatedPastBoards = [...state.pastBoards, state.board];
+    List<SudokuBoard> updatedFutureBoards = [];
+    final length = state.futureBoards.length;
+
+    if (length > 1) {
+      updatedFutureBoards = state.futureBoards.sublist(1, length);
+    }
+
+    state = state.copyWith(
+      board: updatedBoard,
+      pastBoards: updatedPastBoards,
+      futureBoards: updatedFutureBoards,
+    );
   }
 
   void newGame() {
+    // _fetchPuzzle.fetchData();
+
     final seed = _fetchPuzzle();
     final board = _generateSudoku(seed['puzzle']!);
 

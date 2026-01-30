@@ -19,11 +19,11 @@ class InputPad extends ConsumerWidget {
               child: Icon(Icons.backspace),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => controller.undo(),
               child: Icon(Icons.undo),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => controller.redo(),
               child: Icon(Icons.redo),
             ),
             ElevatedButton(
