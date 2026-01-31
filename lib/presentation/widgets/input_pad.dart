@@ -7,6 +7,7 @@ class InputPad extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(sudokuControllerProvider);
     final controller = ref.read(sudokuControllerProvider.notifier);
 
     return Column(
@@ -16,7 +17,7 @@ class InputPad extends ConsumerWidget {
           children: [
             ElevatedButton(
               onPressed: () {},
-              child: Icon(Icons.backspace),
+              child: Icon(Icons.backspace_outlined),
             ),
             ElevatedButton(
               onPressed: () => controller.undo(),
@@ -27,8 +28,8 @@ class InputPad extends ConsumerWidget {
               child: Icon(Icons.redo),
             ),
             ElevatedButton(
-              onPressed: () {},
-              child: Icon(Icons.edit),
+              onPressed: () => controller.pencilToggle(),
+              child: Icon(state.usingPencil ? Icons.edit : Icons.edit_outlined),
             ),
           ],
         ),

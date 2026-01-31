@@ -143,4 +143,8 @@ class SudokuController extends StateNotifier<SudokuState> {
 
     return true; // puzzle completed
   }
+
+  void pencilToggle() {
+    state = state.copyWith(usingPencil: !state.usingPencil);
+  }
 }

@@ -10,6 +10,7 @@ class SudokuState {
   final String seed;
   final String solution;
   final String difficulty;
+  final bool usingPencil;
 
   const SudokuState({
     this.difficulty = '',
@@ -20,6 +21,7 @@ class SudokuState {
     this.futureBoards = const [],
     this.selected,
     this.isCompleted = false,
+    this.usingPencil = false,
   });
 
   SudokuState copyWith({
@@ -30,6 +32,7 @@ class SudokuState {
     String? solution,
     List<SudokuBoard>? pastBoards,
     List<SudokuBoard>? futureBoards,
+    bool? usingPencil,
   }) {
     return SudokuState(
       board: board ?? this.board,
@@ -39,6 +42,7 @@ class SudokuState {
       solution: solution ?? this.solution,
       pastBoards: pastBoards ?? this.pastBoards,
       futureBoards: futureBoards ?? this.futureBoards,
+      usingPencil: usingPencil ?? this.usingPencil,
     );
   }
 
