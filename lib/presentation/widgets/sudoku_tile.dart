@@ -34,14 +34,33 @@ class SudokuTile extends ConsumerWidget {
           color: isSelected ? Colors.cyan[50] : Colors.white,
         ),
         child: Center(
-          child: Text(
-            cell.value == '0' ? '' : cell.value,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: cell.isFixed ? FontWeight.bold : FontWeight.w600,
-              color: cell.isFixed ? Colors.black : Colors.indigo,
-            ),
-          ),
+          child: cell.pencilMarks.isEmpty
+              ? Text(
+                  cell.value == '0' ? '' : cell.value,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: cell.isFixed
+                        ? FontWeight.bold
+                        : FontWeight.w600,
+                    color: cell.isFixed ? Colors.black : Colors.indigo,
+                  ),
+                )
+              : GridView.count(
+                  crossAxisCount: 3,
+                  children: [
+                    ...List.generate(9, (i) {
+                      final number = i + 1;
+                      return Container(
+                        child: Center(
+                          child: Text(
+                            cell.pencilMarks.contains(number) ? '${number}' : '',
+                            style: TextStyle(fontSize: 10, color: Colors.black54),
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
         ),
       ),
     );

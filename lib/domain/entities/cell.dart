@@ -15,13 +15,13 @@ class Cell {
     this.pencilMarks = const <int>{},
   });
 
-  Cell copyWith({String value = '0'}) {
+  Cell copyWith({String value = '0', Set<int> pencilMarks = const <int>{}}) {
     return Cell(
       row: row,
       col: col,
       value: value,
       isFixed: isFixed,
-      isPencil: isPencil,
+      isPencil: pencilMarks.isEmpty,
       pencilMarks: pencilMarks,
     );
   }

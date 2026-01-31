@@ -16,7 +16,7 @@ class InputPad extends ConsumerWidget {
           mainAxisAlignment: .center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => controller.clearCell(),
               child: Icon(Icons.backspace_outlined),
             ),
             ElevatedButton(

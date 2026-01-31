@@ -29,11 +29,11 @@ class SudokuBoard {
     return cells.firstWhere((c) => c.row == row && c.col == col);
   }
 
-  SudokuBoard updateCell(int row, int col, String value) {
+  SudokuBoard updateCell(int row, int col, String value, Set<int> pencilMarks) {
     return SudokuBoard(
       cells.map((cell) {
         if (cell.row == row && cell.col == col && !cell.isFixed) {
-          return cell.copyWith(value: value);
+          return cell.copyWith(value: value, pencilMarks: pencilMarks);
         }
         return cell;
       }).toList(),

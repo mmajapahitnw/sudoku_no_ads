@@ -25,20 +25,37 @@ class SudokuController extends StateNotifier<SudokuState> {
   }
 
   void inputNumber(String value) {
+    final valueInt = int.parse(value);
     final selected = state.selected;
+    final usingPencil = state.usingPencil;
     if (selected == null) return; // escape if no cell is being selected
 
     final cell = state.board.cellAt(selected.row, selected.col);
+    Set<int> pencilMarks = {...cell.pencilMarks};
+
     if (cell.isFixed) return; // escape is the cell's value is given from puzzle
 
-    if (!_validateMove(state.board, selected.row, selected.col, value)) {
-      return; // the move is invalid
+    if (usingPencil) { // input when pencil is on
+      if (cell.value != '0') return;
+      // pencilMarks.add(int.parse(value));
+      pencilMarks.add(valueInt);
+      value = '0';
+    } else { // input when pencil is off
+      if (!_validateMove(state.board, selected.row, selected.col, value)) {
+        return; // the move is invalid
+      }
+      pencilMarks = <int>{};
     }
+
+    print('using pencil: $usingPencil}');
+    print('value: $value');
+    print('pencilMarks: $pencilMarks');
 
     final updatedBoard = state.board.updateCell(
       selected.row,
       selected.col,
       value,
+      pencilMarks,
     );
 
     final completed = _checkCompletion(updatedBoard, state.solution);
@@ -66,6 +83,7 @@ class SudokuController extends StateNotifier<SudokuState> {
       selected.row,
       selected.col,
       '0',
+      const <int>{},
     );
     final updatedPastBoards = [...state.pastBoards, state.board];
 
