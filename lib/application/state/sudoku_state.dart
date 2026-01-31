@@ -36,7 +36,7 @@ class SudokuState {
       selected: selected ?? this.selected,
       isCompleted: isCompleted ?? this.isCompleted,
       seed: seed ?? this.seed,
-      solution: solution ?? this.seed,
+      solution: solution ?? this.solution,
       pastBoards: pastBoards ?? this.pastBoards,
       futureBoards: futureBoards ?? this.futureBoards,
     );

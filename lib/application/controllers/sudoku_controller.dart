@@ -40,7 +40,8 @@ class SudokuController extends StateNotifier<SudokuState> {
       selected.col,
       value,
     );
-    final completed = _checkCompletion();
+
+    final completed = _checkCompletion(updatedBoard, state.solution);
     final updatedPastBoards = [...state.pastBoards, state.board];
 
     state = state.copyWith(
@@ -127,12 +128,16 @@ class SudokuController extends StateNotifier<SudokuState> {
     );
   }
 
-  bool _checkCompletion() {
+  bool _checkCompletion(SudokuBoard board, String solution) {
     var index = 0;
 
-    for (final cell in state.board.cells) {
-      if (cell.value == '0') return false;
-      if (cell.value != state.solution[index]) return false;
+    for (final cell in board.cells) {
+      if (cell.value == '0') {
+        return false;
+      }
+      if (cell.value != solution[index]) {
+        return false;
+      }
       index++;
     }
 
