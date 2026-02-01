@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sudoku_no_ads/application/helpers/app_lifecycle_observer.dart';
 import 'package:sudoku_no_ads/presentation/screens/choose_difficulty_screen.dart';
 import 'package:sudoku_no_ads/presentation/screens/game_play_screen.dart';
 import 'package:sudoku_no_ads/presentation/themes/app_theme.dart';
@@ -14,8 +15,29 @@ void main() {
   // debugPaintPointersEnabled = true;
 }
 
-class SudokuApp extends StatelessWidget {
+class SudokuApp extends ConsumerStatefulWidget {
   const SudokuApp({super.key});
+
+  @override
+  ConsumerState<SudokuApp> createState() => _SudokuAppState();
+}
+
+class _SudokuAppState extends ConsumerState<SudokuApp> {
+  late final AppLifecycleObserver _observer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _observer = AppLifecycleObserver(ref);
+    WidgetsBinding.instance.addObserver(_observer);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(_observer);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +51,23 @@ class SudokuApp extends StatelessWidget {
   static final GoRouter _router = GoRouter(
     routes: [
       GoRoute(
-        path: '/',
-        name: 'home',
-        builder: (context, state) => MainMenuScreen(),
-        routes: [
-          GoRoute(
-            path: 'chooseDifficulty',
-            name: 'chooseDifficulty',
-            builder: (context, state) => ChooseDifficultyScreen(),
-            routes: [
-              GoRoute(
-                path: 'gamePlay',
-                name: 'gamePlay',
-                builder: (context, state) => GamePlayScreen(),
-              )
-            ]
-          ),
-        ]
+          path: '/',
+          name: 'home',
+          builder: (context, state) => MainMenuScreen(),
+          routes: [
+            GoRoute(
+                path: 'chooseDifficulty',
+                name: 'chooseDifficulty',
+                builder: (context, state) => ChooseDifficultyScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'gamePlay',
+                    name: 'gamePlay',
+                    builder: (context, state) => GamePlayScreen(),
+                  )
+                ]
+            ),
+          ]
       ),
     ],
   );

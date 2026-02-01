@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sudoku_no_ads/application/providers/sudoku_providers.dart';
 
 class AppLifecycleObserver extends WidgetsBindingObserver {
-  final Ref ref;
+  final WidgetRef ref;
 
   AppLifecycleObserver(this.ref);
 
