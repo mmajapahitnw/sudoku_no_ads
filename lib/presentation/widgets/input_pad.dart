@@ -44,8 +44,8 @@ class InputPad extends ConsumerWidget {
                   onPressed: () => controller.inputNumber(number.toString()),
                   child: Column(
                     children: [
-                      Text(number.toString(), style: TextStyle(fontSize: 20)),
-                      Text('9', style: TextStyle(fontSize: 10)),
+                      Text(number.toString(), style: Theme.of(context).textTheme.labelMedium),
+                      Text('9', style: Theme.of(context).textTheme.labelSmall!.copyWith(color: Colors.black)),
                     ],
                   ),
                 ),

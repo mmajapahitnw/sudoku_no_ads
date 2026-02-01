@@ -37,12 +37,11 @@ class SudokuTile extends ConsumerWidget {
           child: cell.pencilMarks.isEmpty
               ? Text(
                   cell.value == '0' ? '' : cell.value,
-                  style: TextStyle(
-                    fontSize: 20,
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     fontWeight: cell.isFixed
                         ? FontWeight.bold
                         : FontWeight.w600,
-                    color: cell.isFixed ? Colors.black : Colors.indigo,
+                    color: cell.isFixed ? Colors.deepPurple : Colors.black,
                   ),
                 )
               : GridView.count(
@@ -54,7 +53,7 @@ class SudokuTile extends ConsumerWidget {
                         child: Center(
                           child: Text(
                             cell.pencilMarks.contains(number) ? '${number}' : '',
-                            style: TextStyle(fontSize: 10, color: Colors.black54),
+                            style: Theme.of(context).textTheme.labelSmall,
                           ),
                         ),
                       );
