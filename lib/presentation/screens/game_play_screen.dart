@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sudoku_no_ads/application/providers/sudoku_providers.dart';
+import 'package:sudoku_no_ads/application/state/sudoku_state.dart';
 import '../widgets/sudoku_grid.dart';
 import '../widgets/input_pad.dart';
 
@@ -12,33 +13,28 @@ class GamePlayScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(sudokuControllerProvider);
 
-    // if (state.isCompleted) {
-    //   showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: const Text('Congratulations!'),
-    //         content: const Text('You\'ve completed the puzzle'),
-    //         actions: [
-    //           ElevatedButton(
-    //             onPressed: () => Navigator.of(context).pop(),
-    //             child: Text(
-    //               'OK',
-    //               style: Theme.of(context).textTheme.bodyMedium,
-    //             ),
-    //           ),
-    //           ElevatedButton(
-    //             onPressed: () => context.go('/'),
-    //             child: Text(
-    //               'Main Menu',
-    //               style: Theme.of(context).textTheme.bodyMedium,
-    //             ),
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // }
+    ref.listen<SudokuState>(sudokuControllerProvider, (previous, next) {
+      if (previous?.isCompleted == false && next.isCompleted == true) { // to make sure that this block of code only runs ONCE
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) => AlertDialog(
+            title: const Text('Congratulations!'),
+            content: const Text('You\'ve completed the puzzle.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+              ElevatedButton(
+                onPressed: () => context.go(context.namedLocation('home')),
+                child: const Text('MainMenu'),
+              ),
+            ],
+          )
+        );
+      }
+    });
 
     return Container(
       decoration: BoxDecoration(
