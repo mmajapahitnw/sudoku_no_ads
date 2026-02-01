@@ -1,4 +1,4 @@
-import '../position.dart';
+import '../value_objects/position.dart';
 
 class SelectCell {
   Position call(int row, int col) {

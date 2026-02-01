@@ -1,5 +1,5 @@
 import '../../domain/entities/sudoku_board.dart';
-import '../../domain/position.dart';
+import '../../domain/value_objects/position.dart';
 
 class SudokuState {
   final SudokuBoard board;

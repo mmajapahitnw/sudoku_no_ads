@@ -9,12 +9,15 @@ class DifficultyButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(sudokuControllerProvider.notifier);
+    final timer = ref.read(timerControllerProvider.notifier);
 
     return Column(
       children: [
         ElevatedButton(
           onPressed: () {
             controller.newGame();
+            timer.reset();
+            timer.start();
             context.go(
                 context.namedLocation('gamePlay')
             );

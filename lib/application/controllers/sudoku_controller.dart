@@ -47,10 +47,6 @@ class SudokuController extends StateNotifier<SudokuState> {
       pencilMarks = <int>{};
     }
 
-    print('using pencil: $usingPencil}');
-    print('value: $value');
-    print('pencilMarks: $pencilMarks');
-
     final updatedBoard = state.board.updateCell(
       selected.row,
       selected.col,

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sudoku_no_ads/application/providers/sudoku_providers.dart';
 import 'package:sudoku_no_ads/application/state/sudoku_state.dart';
+import 'package:sudoku_no_ads/presentation/widgets/game_timer_widget.dart';
 import '../widgets/sudoku_grid.dart';
 import '../widgets/input_pad.dart';
 
@@ -15,6 +16,8 @@ class GamePlayScreen extends ConsumerWidget {
 
     ref.listen<SudokuState>(sudokuControllerProvider, (previous, next) {
       if (previous?.isCompleted == false && next.isCompleted == true) { // to make sure that this block of code only runs ONCE
+        ref.read(timerControllerProvider.notifier).stop();
+
         showDialog(
           context: context,
           barrierDismissible: false,
@@ -48,6 +51,7 @@ class GamePlayScreen extends ConsumerWidget {
               Text('easy SUDOKU',
               style: Theme.of(context).textTheme.displayLarge,),
               Spacer(),
+              GameTimerWidget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: SudokuGrid(),
