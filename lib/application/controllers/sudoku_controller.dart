@@ -161,4 +161,8 @@ class SudokuController extends StateNotifier<SudokuState> {
   void pencilToggle() {
     state = state.copyWith(usingPencil: !state.usingPencil);
   }
+
+  void testApi() {
+    _fetchPuzzle.fetchData();
+  }
 }

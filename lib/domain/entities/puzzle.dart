@@ -9,7 +9,7 @@ class Puzzle {
     required this.solution,
   });
 
-  factory Puzzle.fromJson(Map<String, String> json) {
+  factory Puzzle.fromJson(Map<String, dynamic> json) {
     return switch (json) {
       {
         'difficulty': String difficulty,

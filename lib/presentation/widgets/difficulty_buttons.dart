@@ -35,10 +35,7 @@ class DifficultyButtons extends ConsumerWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            controller.newGame();
-            context.go(
-                context.namedLocation('gamePlay')
-            );
+            controller.testApi();
           },
           child: Text('Hard'),
         ),
