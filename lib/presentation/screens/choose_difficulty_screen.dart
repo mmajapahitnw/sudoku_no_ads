@@ -12,6 +12,10 @@ class ChooseDifficultyScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Icon(Icons.arrow_back_rounded),
+              ),
               Spacer(),
               Text('Choose Difficulty',
               style: Theme.of(context).textTheme.displayLarge,

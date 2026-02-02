@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku_no_ads/presentation/widgets/app_background.dart';
 import '../widgets/menu_buttons.dart';
+import '../widgets/resume_button.dart';
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -18,7 +19,7 @@ class MainMenuScreen extends StatelessWidget {
               textAlign: .center,),
               Spacer(),
               MenuButtons(label: 'New Game', routeAddress: 'chooseDifficulty'),
-              MenuButtons(label: 'Resume', routeAddress: ''),
+              ResumeButtons(label: 'Resume', routeAddress: 'gamePlay'),
               MenuButtons(label: 'History', routeAddress: ''),
               Spacer(),
             ],

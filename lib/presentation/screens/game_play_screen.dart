@@ -13,9 +13,11 @@ class GamePlayScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(sudokuControllerProvider);
+    final timer = ref.read(timerControllerProvider.notifier);
 
     ref.listen<SudokuState>(sudokuControllerProvider, (previous, next) {
-      if (previous?.isCompleted == false && next.isCompleted == true) { // to make sure that this block of code only runs ONCE
+      if (previous?.isCompleted == false && next.isCompleted == true) {
+        // to make sure that this block of code only runs ONCE
         ref.read(timerControllerProvider.notifier).stop();
 
         showDialog(
@@ -34,7 +36,7 @@ class GamePlayScreen extends ConsumerWidget {
                 child: const Text('MainMenu'),
               ),
             ],
-          )
+          ),
         );
       }
     });
@@ -48,8 +50,17 @@ class GamePlayScreen extends ConsumerWidget {
           child: Column(
             spacing: 12,
             children: [
-              Text('easy SUDOKU',
-              style: Theme.of(context).textTheme.displayLarge,),
+              ElevatedButton(
+                onPressed: () {
+                  timer.pause();
+                  context.go(context.namedLocation('home'));
+                },
+                child: const Icon(Icons.arrow_back_rounded),
+              ),
+              Text(
+                'easy SUDOKU',
+                style: Theme.of(context).textTheme.displayLarge,
+              ),
               Spacer(),
               GameTimerWidget(),
               Padding(

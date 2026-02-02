@@ -11,7 +11,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final timer = ref.read(timerControllerProvider.notifier);
 
-    if (state ==AppLifecycleState.paused) {
+    if (state == AppLifecycleState.paused) {
       timer.pause();
     } else if (state == AppLifecycleState.resumed) {
       timer.start();

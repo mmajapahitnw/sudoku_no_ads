@@ -29,7 +29,6 @@ class FetchPuzzle {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final Puzzle puzzle = Puzzle.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      print(puzzle.puzzle);
       return puzzle;
     } else {
       throw Exception('Failed to fetch puzzle: ${response.statusCode}');

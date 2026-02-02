@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:sudoku_no_ads/domain/value_objects/game_timer.dart';
 
@@ -23,7 +21,9 @@ class TimerController extends StateNotifier<GameTimer> {
 
   void pause() {
     _stopwatch.stop();
-    state = state.copyWith(isRunning: false);
+    final newOffset = state.offset + _stopwatch.elapsed;
+    _stopwatch.reset();
+    state = state.copyWith(isRunning: false, offset: newOffset);
   }
 
   void reset() {

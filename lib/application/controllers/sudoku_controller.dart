@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:sudoku_no_ads/application/state/sudoku_state.dart';
-import 'package:sudoku_no_ads/domain/entities/puzzle.dart';
 import 'package:sudoku_no_ads/domain/entities/sudoku_board.dart';
 import 'package:sudoku_no_ads/domain/use_cases/fetch_puzzle.dart';
 import 'package:sudoku_no_ads/domain/use_cases/generate_sudoku.dart';
@@ -130,7 +129,6 @@ class SudokuController extends StateNotifier<SudokuState> {
 
   Future<void> newGame(String difficulty) async {
     final newPuzzle = await _fetchPuzzle.fetchData(difficulty);
-    print(newPuzzle.puzzle);
     final board = _generateSudoku(newPuzzle.puzzle);
 
     state = SudokuState(
