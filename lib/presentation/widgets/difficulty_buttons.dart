@@ -15,7 +15,7 @@ class DifficultyButtons extends ConsumerWidget {
       children: [
         ElevatedButton(
           onPressed: () {
-            controller.newGame();
+            controller.newGame('easy');
             timer.reset();
             timer.start();
             context.go(
@@ -26,7 +26,9 @@ class DifficultyButtons extends ConsumerWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            controller.newGame();
+            controller.newGame('medium');
+            timer.reset();
+            timer.start();
             context.go(
                 context.namedLocation('gamePlay')
             );
@@ -35,7 +37,12 @@ class DifficultyButtons extends ConsumerWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            controller.testApi();
+            controller.newGame('hard');
+            timer.reset();
+            timer.start();
+            context.go(
+                context.namedLocation('gamePlay')
+            );
           },
           child: Text('Hard'),
         ),

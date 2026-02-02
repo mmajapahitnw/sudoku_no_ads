@@ -1,3 +1,5 @@
+import 'package:sudoku_no_ads/domain/entities/puzzle.dart';
+
 import '../../domain/entities/sudoku_board.dart';
 import '../../domain/value_objects/position.dart';
 
@@ -7,29 +9,24 @@ class SudokuState {
   final List<SudokuBoard> futureBoards;
   final Position? selected;
   final bool isCompleted;
-  final String seed;
-  final String solution;
-  final String difficulty;
+  final Puzzle puzzle;
   final bool usingPencil;
 
   const SudokuState({
-    this.difficulty = '',
-    this.seed = '',
-    this.solution = '',
     required this.board,
     this.pastBoards = const [],
     this.futureBoards = const [],
     this.selected,
     this.isCompleted = false,
     this.usingPencil = false,
+    this.puzzle = const Puzzle(difficulty: '', puzzle: '', solution: ''),
   });
 
   SudokuState copyWith({
     SudokuBoard? board,
     Position? selected,
     bool? isCompleted,
-    String? seed,
-    String? solution,
+    Puzzle? puzzle,
     List<SudokuBoard>? pastBoards,
     List<SudokuBoard>? futureBoards,
     bool? usingPencil,
@@ -38,8 +35,7 @@ class SudokuState {
       board: board ?? this.board,
       selected: selected ?? this.selected,
       isCompleted: isCompleted ?? this.isCompleted,
-      seed: seed ?? this.seed,
-      solution: solution ?? this.solution,
+      puzzle: puzzle ?? this.puzzle,
       pastBoards: pastBoards ?? this.pastBoards,
       futureBoards: futureBoards ?? this.futureBoards,
       usingPencil: usingPencil ?? this.usingPencil,

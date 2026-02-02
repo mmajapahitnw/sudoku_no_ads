@@ -54,7 +54,7 @@ class SudokuController extends StateNotifier<SudokuState> {
       pencilMarks,
     );
 
-    final completed = _checkCompletion(updatedBoard, state.solution);
+    final completed = _checkCompletion(updatedBoard, state.puzzle.solution);
     final updatedPastBoards = [...state.pastBoards, state.board];
 
     state = state.copyWith(
@@ -128,17 +128,14 @@ class SudokuController extends StateNotifier<SudokuState> {
     );
   }
 
-  void newGame() {
-    // _fetchPuzzle.fetchData();
-
-    final seed = _fetchPuzzle();
-    final board = _generateSudoku(seed['puzzle']!);
+  Future<void> newGame(String difficulty) async {
+    final newPuzzle = await _fetchPuzzle.fetchData(difficulty);
+    print(newPuzzle.puzzle);
+    final board = _generateSudoku(newPuzzle.puzzle);
 
     state = SudokuState(
       board: board,
-      seed: seed['puzzle']!,
-      solution: seed['solution']!,
-      difficulty: seed['difficulty']!,
+      puzzle: newPuzzle,
     );
   }
 
@@ -160,9 +157,5 @@ class SudokuController extends StateNotifier<SudokuState> {
 
   void pencilToggle() {
     state = state.copyWith(usingPencil: !state.usingPencil);
-  }
-
-  void testApi() {
-    _fetchPuzzle.fetchData();
   }
 }

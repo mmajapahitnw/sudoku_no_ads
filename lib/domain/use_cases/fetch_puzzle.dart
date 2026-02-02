@@ -12,7 +12,7 @@ class FetchPuzzle {
     };
   }
 
-  Future<void> fetchData() async {
+  Future<Puzzle> fetchData(String difficulty) async {
     const apiKey = 'gM0uK8WknNLRZNLzMOr8Rr02j8ylEKuRxMKCxUzJWbE';
     final url = Uri.parse('https://you-do-sudoku-api.vercel.app/api');
 
@@ -23,12 +23,14 @@ class FetchPuzzle {
           'x-api-key': apiKey,
         },
         body: jsonEncode({
-          'difficulty': 'hard'
+          'difficulty': difficulty
         })
     );
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      final puzzle = Puzzle.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      final Puzzle puzzle = Puzzle.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      print(puzzle.puzzle);
+      return puzzle;
     } else {
       throw Exception('Failed to fetch puzzle: ${response.statusCode}');
     }
