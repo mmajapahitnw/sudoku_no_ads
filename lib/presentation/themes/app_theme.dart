@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData appTheme = ThemeData(
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+  // appBarTheme: ColorScheme.fromSwatch(backgroundColor: Color.fromRGBO(227, 228, 237, 1)),
+  scaffoldBackgroundColor: Color.fromRGBO(227, 228, 237, 1),
+  colorScheme: ColorScheme.fromSwatch(
+    backgroundColor: Color.fromRGBO(227, 228, 237, 1),
+  ),
   // brightness: Brightness.dark,
   textTheme: TextTheme(
     displayLarge: GoogleFonts.poppins(

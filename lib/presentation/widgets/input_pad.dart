@@ -11,43 +11,119 @@ class InputPad extends ConsumerWidget {
     final controller = ref.read(sudokuControllerProvider.notifier);
 
     return Column(
+      spacing: 12,
       children: [
         Row(
           mainAxisAlignment: .center,
           children: [
-            ElevatedButton(
+            MaterialButton(
+              textColor: Colors.black54,
               onPressed: () => controller.clearCell(),
-              child: Icon(Icons.backspace_outlined),
+              child: Column(
+                spacing: 2,
+                children: [
+                  Icon(Icons.backspace_outlined),
+                  Text(
+                    'Erase',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall!.copyWith(color: Colors.black54),
+                  ),
+                ],
+              ),
             ),
-            ElevatedButton(
+            Spacer(),
+            MaterialButton(
+              textColor: Colors.black54,
               onPressed: () => controller.undo(),
-              child: Icon(Icons.undo),
+              child: Column(
+                spacing: 2,
+                children: [
+                  Icon(Icons.undo),
+                  Text(
+                    'Undo',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall!.copyWith(color: Colors.black54),
+                  ),
+                ],
+              ),
             ),
-            ElevatedButton(
+            Spacer(),
+            MaterialButton(
+              textColor: Colors.black54,
               onPressed: () => controller.redo(),
-              child: Icon(Icons.redo),
+              child: Column(
+                spacing: 2,
+                children: [
+                  Icon(Icons.redo),
+                  Text(
+                    'Redo',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall!.copyWith(color: Colors.black54),
+                  ),
+                ],
+              ),
             ),
-            ElevatedButton(
+            Spacer(),
+            MaterialButton(
+              textColor: Colors.black54,
               onPressed: () => controller.pencilToggle(),
-              child: Icon(state.usingPencil ? Icons.edit : Icons.edit_outlined),
+              child: Column(
+                spacing: 2,
+                children: [
+                  Icon(state.usingPencil ? Icons.edit : Icons.edit_off,
+                  color: state.usingPencil ? Colors.indigoAccent : Colors.black54,),
+                  Text(
+                    'Pencil',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.labelSmall!.copyWith(color: Colors.black54),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
         Wrap(
           alignment: .center,
+          spacing: 4,
           children: [
             ...List.generate(9, (index) {
               final number = index + 1;
-              return Padding(
-                padding: EdgeInsets.all(2),
-                child: ElevatedButton(
-                  onPressed: () => controller.inputNumber(number.toString()),
-                  child: Column(
-                    children: [
-                      Text(number.toString(), style: Theme.of(context).textTheme.labelMedium),
-                      Text('9', style: Theme.of(context).textTheme.labelSmall!.copyWith(color: Colors.black)),
-                    ],
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
+                  elevation: 2,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () => controller.inputNumber(number.toString()),
+                child: Column(
+                  spacing: 0,
+                  children: [
+                    Text(
+                      number.toString(),
+                      style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.indigoAccent,
+                        fontWeight: .w400,
+                      ),
+                    ),
+                    Text(
+                      '9',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelSmall!.copyWith(color: Colors.black),
+                    ),
+                  ],
                 ),
               );
             }),

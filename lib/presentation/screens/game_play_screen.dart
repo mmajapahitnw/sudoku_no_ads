@@ -67,44 +67,47 @@ class GamePlayScreen extends ConsumerWidget {
       }
     });
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceTint,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(227, 228, 237, 1),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.pause))],
       ),
-      child: SafeArea(
+      body: SafeArea(
         child: Center(
-          child: Column(
-            spacing: 12,
-            children: [
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      timer.pause();
-                      context.go(context.namedLocation('home'));
-                    },
-                    child: const Icon(Icons.arrow_back_rounded),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              spacing: 4,
+              children: [
+                Spacer(),
+                Text(
+                  gameState.puzzle.difficulty,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.indigoAccent,
+                    fontWeight: .w600,
                   ),
-                  ElevatedButton(
-                    onPressed: () => game.testComplete(),
-                    child: const Text('complete!'),
-                  ),
-                ],
-              ),
-              Text(
-                'easy SUDOKU',
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-              Spacer(),
-              GameTimerWidget(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: SudokuGrid(),
-              ),
-              const Divider(height: 1),
-              InputPad(),
-              Spacer(),
-            ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Hints used: 0',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black45,
+                        fontWeight: .w600,
+                      ),
+                    ),
+                    Spacer(),
+                    GameTimerWidget(),
+                  ],
+                ),
+                SudokuGrid(),
+                SizedBox(height: 8,),
+                InputPad(),
+                Spacer(flex: 2,),
+              ],
+            ),
           ),
         ),
       ),

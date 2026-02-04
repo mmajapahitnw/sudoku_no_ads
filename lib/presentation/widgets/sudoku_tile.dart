@@ -41,7 +41,7 @@ class SudokuTile extends ConsumerWidget {
                     fontWeight: cell.isFixed
                         ? FontWeight.bold
                         : FontWeight.w600,
-                    color: cell.isFixed ? Colors.deepPurple : Colors.black,
+                    color: cell.isFixed ? Colors.black : Colors.indigo,
                   ),
                 )
               : GridView.count(

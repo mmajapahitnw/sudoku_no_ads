@@ -16,19 +16,12 @@ class GameTimerWidget extends ConsumerWidget {
       maintainSize: true,
       maintainAnimation: true,
       maintainState: true,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Text(
-            formatDuration(timer.time),
-            style: GoogleFonts.robotoMono(
-              textStyle: Theme.of(context).textTheme.labelMedium,
-            ),
-          ),
+      child: Text(
+        formatDuration(timer.time),
+        style: TextStyle(
+          fontSize: 14,
+          color: Colors.black54,
+          fontWeight: .w600,
         ),
       ),
     );
