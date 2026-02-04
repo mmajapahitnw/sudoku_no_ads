@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku_no_ads/presentation/widgets/app_background.dart';
+import 'package:sudoku_no_ads/presentation/widgets/difficulty_dialog_options.dart';
 import '../widgets/menu_buttons.dart';
 import '../widgets/resume_button.dart';
 
@@ -8,9 +8,11 @@ class MainMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBackground(
-      child: SafeArea(
-        child: Center(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(227, 228, 237, 1),
+      ),
+        body: Center(
           child: Column(
             children: [
               Spacer(),
@@ -18,14 +20,35 @@ class MainMenuScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.displayLarge,
               textAlign: .center,),
               Spacer(),
-              MenuButtons(label: 'New Game', routeAddress: 'chooseDifficulty'),
+              ElevatedButton(
+                  onPressed: () {
+                    _askedDifficulty(context);
+                  },
+                  child: const Text('New Game'),
+              ),
               ResumeButtons(label: 'Resume', routeAddress: 'gamePlay'),
               MenuButtons(label: 'History', routeAddress: 'history'),
               Spacer(),
             ],
           ),
         ),
-      ),
+      )
+    ;
+  }
+
+  Future<void> _askedDifficulty(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text('Select Difficulty'),
+          children: [
+            DifficultyDialogOptions(difficulty: 'Easy',),
+            DifficultyDialogOptions(difficulty: 'Medium',),
+            DifficultyDialogOptions(difficulty: 'Hard',),
+          ],
+        );
+      }
     );
   }
 }

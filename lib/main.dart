@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:sudoku_no_ads/application/helpers/app_lifecycle_observer.dart';
 import 'package:sudoku_no_ads/data/boxes.dart';
 import 'package:sudoku_no_ads/data/game_result.dart';
-import 'package:sudoku_no_ads/presentation/screens/choose_difficulty_screen.dart';
 import 'package:sudoku_no_ads/presentation/screens/game_play_screen.dart';
 import 'package:sudoku_no_ads/presentation/screens/history_screen.dart';
 import 'package:sudoku_no_ads/presentation/themes/app_theme.dart';
@@ -63,16 +62,9 @@ class _SudokuAppState extends ConsumerState<SudokuApp> {
         builder: (context, state) => MainMenuScreen(),
         routes: [
           GoRoute(
-            path: 'chooseDifficulty',
-            name: 'chooseDifficulty',
-            builder: (context, state) => ChooseDifficultyScreen(),
-            routes: [
-              GoRoute(
-                path: 'gamePlay',
-                name: 'gamePlay',
-                builder: (context, state) => GamePlayScreen(),
-              ),
-            ],
+            path: 'gamePlay',
+            name: 'gamePlay',
+            builder: (context, state) => GamePlayScreen(),
           ),
           GoRoute(
             path: 'history',
