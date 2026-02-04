@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:sudoku_no_ads/application/providers/sudoku_providers.dart';
 import 'package:sudoku_no_ads/application/state/sudoku_state.dart';
 import 'package:sudoku_no_ads/presentation/widgets/game_timer_widget.dart';
+import 'package:uuid/uuid.dart';
+import '../../data/boxes.dart';
+import '../../data/game_result.dart';
 import '../widgets/sudoku_grid.dart';
 import '../widgets/input_pad.dart';
 
@@ -12,13 +15,34 @@ class GamePlayScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(sudokuControllerProvider);
+    final game = ref.read(sudokuControllerProvider.notifier);
+    final gameState = ref.watch(sudokuControllerProvider);
     final timer = ref.read(timerControllerProvider.notifier);
+    final timerState = ref.watch(timerControllerProvider);
 
     ref.listen<SudokuState>(sudokuControllerProvider, (previous, next) {
       if (previous?.isCompleted == false && next.isCompleted == true) {
         // to make sure that this block of code only runs ONCE
         ref.read(timerControllerProvider.notifier).stop();
+
+        // saving game result
+        print('saving result');
+        final String uuid = Uuid().v4();
+        final elapsed = timerState.time;
+        final puzzle = gameState.puzzle;
+        boxGameResults.put(
+          'key_$uuid',
+          GameResult(
+            id: uuid,
+            completedAt: DateTime.now(),
+            duration: {
+              'hour': elapsed.inHours,
+              'minute': elapsed.inMinutes.remainder(60),
+              'second': elapsed.inSeconds.remainder(60),
+            },
+            puzzle: puzzle.toMap(),
+          ),
+        );
 
         showDialog(
           context: context,
@@ -32,7 +56,9 @@ class GamePlayScreen extends ConsumerWidget {
                 child: const Text('OK'),
               ),
               ElevatedButton(
-                onPressed: () => context.go(context.namedLocation('home')),
+                onPressed: () {
+                  context.go(context.namedLocation('home'));
+                },
                 child: const Text('MainMenu'),
               ),
             ],
@@ -50,12 +76,20 @@ class GamePlayScreen extends ConsumerWidget {
           child: Column(
             spacing: 12,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  timer.pause();
-                  context.go(context.namedLocation('home'));
-                },
-                child: const Icon(Icons.arrow_back_rounded),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      timer.pause();
+                      context.go(context.namedLocation('home'));
+                    },
+                    child: const Icon(Icons.arrow_back_rounded),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => game.testComplete(),
+                    child: const Text('complete!'),
+                  ),
+                ],
               ),
               Text(
                 'easy SUDOKU',

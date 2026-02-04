@@ -20,4 +20,12 @@ class Puzzle {
       _ => throw const FormatException('Failed to load puzzle'),
     };
   }
+
+  Map<String, String> toMap() {
+    return {
+      'difficulty': difficulty,
+      'puzzle': puzzle,
+      'solution': solution,
+    };
+  }
 }

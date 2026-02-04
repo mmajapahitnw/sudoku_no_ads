@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sudoku_no_ads/data/boxes.dart';
+import 'package:sudoku_no_ads/data/game_result.dart';
+
+class HistoryScreen extends ConsumerWidget {
+  const HistoryScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      body: ListView.builder(
+        itemCount: boxGameResults.length,
+        itemBuilder: (context, index) {
+          GameResult result = boxGameResults.getAt(index);
+          return ListTile(
+            leading: IconButton(
+              onPressed: () {
+                boxGameResults.deleteAt(index);
+              },
+              icon: const Icon(Icons.remove),
+            ),
+            title: Text('${result.puzzle['difficulty']} Sudoku'),
+            // subtitle: Text(result.completedAt.toString()),
+          );
+        },
+      ),
+    );
+  }
+}

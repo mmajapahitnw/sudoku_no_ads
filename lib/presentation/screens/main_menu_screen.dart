@@ -20,7 +20,7 @@ class MainMenuScreen extends StatelessWidget {
               Spacer(),
               MenuButtons(label: 'New Game', routeAddress: 'chooseDifficulty'),
               ResumeButtons(label: 'Resume', routeAddress: 'gamePlay'),
-              MenuButtons(label: 'History', routeAddress: ''),
+              MenuButtons(label: 'History', routeAddress: 'history'),
               Spacer(),
             ],
           ),

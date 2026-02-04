@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/sudoku_no_ads.iml" filepath="$PROJECT_DIR$/sudoku_no_ads.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/sudoku_no_ads_android.iml" filepath="$PROJECT_DIR$/android/sudoku_no_ads_android.iml" />
     </modules>
   </component>
 </project>
