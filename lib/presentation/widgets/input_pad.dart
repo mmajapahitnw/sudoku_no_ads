@@ -113,7 +113,7 @@ class InputPad extends ConsumerWidget {
                       number.toString(),
                       style: TextStyle(
                         fontSize: 28,
-                        color: Colors.indigoAccent,
+                        color: state.usingPencil ? Colors.black54 : Colors.indigoAccent,
                         fontWeight: .w400,
                       ),
                     ),
