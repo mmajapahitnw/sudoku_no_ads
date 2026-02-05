@@ -9,8 +9,9 @@ class HistoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(227, 228, 237, 1),
+      ),
       body: ListView.builder(
         itemCount: boxGameResults.length,
         itemBuilder: (context, index) {
@@ -23,7 +24,7 @@ class HistoryScreen extends ConsumerWidget {
               icon: const Icon(Icons.remove),
             ),
             title: Text('${result.puzzle['difficulty']} Sudoku'),
-            // subtitle: Text(result.completedAt.toString()),
+            subtitle: Text(result.completedAt.toString().substring(0,16)),
           );
         },
       ),

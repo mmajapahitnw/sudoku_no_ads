@@ -26,7 +26,7 @@ class MainMenuScreen extends StatelessWidget {
                   },
                   child: const Text('New Game'),
               ),
-              ResumeButtons(label: 'Resume', routeAddress: 'gamePlay'),
+              ResumeButton(),
               MenuButtons(label: 'History', routeAddress: 'history'),
               Spacer(),
             ],
