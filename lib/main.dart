@@ -7,6 +7,7 @@ import 'package:sudoku_no_ads/data/boxes.dart';
 import 'package:sudoku_no_ads/data/game_result.dart';
 import 'package:sudoku_no_ads/presentation/screens/game_play_screen.dart';
 import 'package:sudoku_no_ads/presentation/screens/history_screen.dart';
+import 'package:sudoku_no_ads/presentation/screens/result_detail_screen.dart';
 import 'package:sudoku_no_ads/presentation/themes/app_theme.dart';
 import 'presentation/screens/main_menu_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -70,6 +71,12 @@ class _SudokuAppState extends ConsumerState<SudokuApp> {
             path: 'history',
             name: 'history',
             builder: (context, state) => HistoryScreen(),
+            routes: [
+              GoRoute(path: 'resultDetail',name: 'resultDetail', builder: (context, state) {
+                final result = state.extra as GameResult;
+                return ResultDetailScreen(result: result);
+              }),
+            ]
           ),
         ],
       ),
