@@ -11,6 +11,7 @@ class SudokuState {
   final bool isCompleted;
   final Puzzle puzzle;
   final bool usingPencil;
+  final int hintUsed;
 
   const SudokuState({
     required this.board,
@@ -20,6 +21,7 @@ class SudokuState {
     this.isCompleted = false,
     this.usingPencil = false,
     this.puzzle = const Puzzle(difficulty: '', puzzle: '', solution: ''),
+    this.hintUsed = 0,
   });
 
   SudokuState copyWith({
@@ -30,6 +32,7 @@ class SudokuState {
     List<SudokuBoard>? pastBoards,
     List<SudokuBoard>? futureBoards,
     bool? usingPencil,
+    int? hintUsed,
   }) {
     return SudokuState(
       board: board ?? this.board,
@@ -39,6 +42,7 @@ class SudokuState {
       pastBoards: pastBoards ?? this.pastBoards,
       futureBoards: futureBoards ?? this.futureBoards,
       usingPencil: usingPencil ?? this.usingPencil,
+      hintUsed: hintUsed ?? this.hintUsed,
     );
   }
 

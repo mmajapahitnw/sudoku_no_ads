@@ -52,13 +52,13 @@ class InputPad extends ConsumerWidget {
             Spacer(),
             MaterialButton(
               textColor: Colors.black54,
-              onPressed: () => controller.redo(),
+              onPressed: () => controller.giveHint(),
               child: Column(
                 spacing: 2,
                 children: [
-                  Icon(Icons.redo),
+                  Icon(Icons.lightbulb),
                   Text(
-                    'Redo',
+                    'Hint',
                     style: Theme.of(
                       context,
                     ).textTheme.labelSmall!.copyWith(color: Colors.black54),
@@ -118,7 +118,7 @@ class InputPad extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      '9',
+                      '',
                       style: Theme.of(
                         context,
                       ).textTheme.labelSmall!.copyWith(color: Colors.black),

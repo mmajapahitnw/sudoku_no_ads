@@ -23,7 +23,7 @@ class SudokuController extends StateNotifier<SudokuState> {
     state = state.copyWith(selected: _selectCell(row, col));
   }
 
-  void inputNumber(String value) {
+  void inputNumber(String value, {bool fromHint = false}) {
     final valueInt = int.parse(value);
     final selected = state.selected;
     final usingPencil = state.usingPencil;
@@ -56,12 +56,22 @@ class SudokuController extends StateNotifier<SudokuState> {
     final completed = _checkCompletion(updatedBoard, state.puzzle.solution);
     final updatedPastBoards = [...state.pastBoards, state.board];
 
-    state = state.copyWith(
-      board: updatedBoard,
-      pastBoards: updatedPastBoards,
-      futureBoards: [],
-      isCompleted: completed,
-    );
+    if (fromHint) {
+      state = state.copyWith(
+        board: updatedBoard,
+        pastBoards: updatedPastBoards,
+        futureBoards: [],
+        isCompleted: completed,
+        hintUsed: state.hintUsed + 1,
+      );
+    } else {
+      state = state.copyWith(
+        board: updatedBoard,
+        pastBoards: updatedPastBoards,
+        futureBoards: [],
+        isCompleted: completed,
+      );
+    }
   }
 
   void clearCell() {
@@ -157,7 +167,12 @@ class SudokuController extends StateNotifier<SudokuState> {
     state = state.copyWith(usingPencil: !state.usingPencil);
   }
 
-  void testComplete() {
-    state = state.copyWith(isCompleted: true);
+  void giveHint() {
+    final cell = state.board.cellAt(state.selected.row, state.selected.col);
+
+    if (cell.value != '0') return;
+
+    final index = state.selected.row * 9 + state.selected.col;
+    inputNumber(state.puzzle.solution[index], fromHint: true);
   }
 }

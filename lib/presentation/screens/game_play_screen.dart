@@ -95,7 +95,7 @@ class GamePlayScreen extends ConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      'Hints used: 0',
+                      'Hints used: ${gameState.hintUsed}',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black45,
