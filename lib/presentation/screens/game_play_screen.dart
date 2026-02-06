@@ -69,6 +69,10 @@ class GamePlayScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: () {
+          Navigator.pop(context);
+          timer.pause();
+        }, icon: const Icon(Icons.arrow_back)),
         backgroundColor: Color.fromRGBO(227, 228, 237, 1),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.pause))],
       ),
