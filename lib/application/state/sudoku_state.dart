@@ -7,7 +7,7 @@ class SudokuState {
   final SudokuBoard board;
   final List<SudokuBoard> pastBoards;
   final List<SudokuBoard> futureBoards;
-  final Position? selected;
+  final Position selected;
   final bool isCompleted;
   final Puzzle puzzle;
   final bool usingPencil;
@@ -16,7 +16,7 @@ class SudokuState {
     required this.board,
     this.pastBoards = const [],
     this.futureBoards = const [],
-    this.selected,
+    this.selected = const Position(0, 0),
     this.isCompleted = false,
     this.usingPencil = false,
     this.puzzle = const Puzzle(difficulty: '', puzzle: '', solution: ''),
